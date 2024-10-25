@@ -4,5 +4,9 @@
 
 Radar equipment that can be placed in vehicles. Intended for driving tanks remotely in Space Age.
 
+# How?
+
+Adding radar equipment is not a native Factorio-engine feature. So instead you have a hidden spidertron friend following you around. Remember to leave some Yumako Mash lying around so he can sneak-eat a snack when you're not looking.
+
 # Credits
 - _justarandomgeek_ for the [Factorio Modding Toolkit](https://marketplace.visualstudio.com/items?itemName=justarandomgeek.factoriomod-debug), without which this mod would not have been possible.
