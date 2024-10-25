@@ -1,0 +1,14 @@
+{
+  "name": "radar-equipment",
+  "version": "0.1.0",
+  "title": "Radar Equipment",
+  "description": "A portable radar that can be placed in equipment grids. Designed for driving the tank remotely in Space Age.",
+  "author": "stringweasel",
+  "factorio_version": "2.0",
+  "dependencies": [ 
+    "base >= 2.0.8"
+  ],
+  "package":{
+    "ignore":[ "*.md", "*.zip", "mod-page/*" ]
+  }
+}
