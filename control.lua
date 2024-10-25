@@ -97,7 +97,7 @@ end
 ---@param event EventData.on_tick
 script.on_event(defines.events.on_tick, function(event)
     for unit_number, tracker in pairs(storage.tracked_by_entity) do
-        if (event.tick + unit_number) % (60 * 5) == 0 then
+        if (event.tick + unit_number) % (60 * 3) == 0 then
             update(tracker)
         end
     end
@@ -119,8 +119,11 @@ script.on_event(defines.events.on_equipment_removed, function (event)
     local tracker = storage.tracked_by_grid[event.grid.unique_id]
     if not tracker then return end
     local entity = tracker.owner
-    if not entity.valid then destroy(tracker) end
-    if not (entity.grid and entity.grid.find("radar-equipment")) then
+    if not (entity.valid and entity.grid) then destroy(tracker) end
+    local remaining_equipment = entity.grid.find("radar-equipment")
+    if remaining_equipment then
+        tracker.equipment = remaining_equipment
+    else
         destroy(tracker)  -- Only destroy the tracker if if the last equipment is removed
     end
 end)
@@ -133,9 +136,12 @@ local on_entity_destroyed = function(event)
     local tracker = storage.tracked_by_entity[entity.unit_number]
     if not tracker then return end
 
-    if not entity.valid then destroy(tracker) end
-    if not (entity.grid and entity.grid.find("radar-equipment")) then
-        destroy(tracker) -- Only destroy the tracker if if the last equipment is removed
+    if not entity.grid then destroy(tracker) return end
+    local remaining_equipment = entity.grid.find("radar-equipment")
+    if remaining_equipment then
+        tracker.equipment = remaining_equipment
+    else
+        destroy(tracker)  -- Only destroy the tracker if if the last equipment is removed
     end
 end
 script.on_event(defines.events.on_player_mined_entity, on_entity_destroyed)
