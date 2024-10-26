@@ -20,6 +20,7 @@ data:extend{
         movement_energy_consumption = "250kW",
         chain_shooting_cooldown_modifier = 0.5,
         automatic_weapon_cycling = false,
+        allow_passengers = false,
         spider_engine =
         {
             legs =
