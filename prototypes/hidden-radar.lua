@@ -18,6 +18,7 @@ data:extend{
         chunk_exploration_radius = 3,
         energy_source = { type = "void" },
         movement_energy_consumption = "250kW",
+        equipment_grid = "spidertron-equipment-grid",
         chain_shooting_cooldown_modifier = 0.5,
         automatic_weapon_cycling = false,
         allow_passengers = false,

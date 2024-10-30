@@ -1,3 +1,6 @@
+-- Command to open friend's GUI
+--  /c __radar-equipment__ game.player.opened = storage.tracked_by_entity[game.player.selected.unit_number].radar
+
 ---@type string
 local highest_quality
 local highest_level = -100
@@ -49,6 +52,29 @@ local function destroy(tracker)
     storage.tracked_by_grid[unique_id] = nil
 end
 
+---@param owner LuaEntity
+---@return LuaEntity?
+local function create_radar(owner)
+    local radar = owner.surface.create_entity{
+        name = "hidden-equipment-radar-friend",
+        position = owner.position,
+        force = owner.force,
+        -- Not making quality, because no way to hide the quality icon.
+    }
+    if not radar then return end
+    radar.destructible = false
+    radar.follow_target = owner -- Set your spider friend to follow the owner
+    
+    -- Add some high quality equipment to make radar faster
+    local grid = radar.grid
+    grid.put{ name = "fission-reactor-equipment", quality = highest_quality, position = { 0, 0 }, }    
+    grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 4, 0 }, }    
+    grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 6, 0 }, }    
+    grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 8, 0 }, }
+    
+    return radar
+end
+
 ---@param tracker Tracker
 local function update(tracker)
     local owner = tracker.owner
@@ -63,20 +89,12 @@ local function update(tracker)
     local has_energy = equipment.energy ~= 0 and not equipment.to_be_removed
 
     if has_energy and not (radar and radar.valid) then
-        tracker.radar = owner.surface.create_entity{
-            name = "hidden-equipment-radar-friend",
-            position = owner.position,
-            force = owner.force,
-            quality = highest_quality, -- To make your friend speedy
-        }
-        radar = tracker.radar
-        if not radar then
-            -- A mod could've destroyed the hidden radar.
-            destroy(tracker)
-            return
+        tracker.radar = create_radar(owner)
+        radar = tracker.radar        
+        if radar then
+            radar.destructible = false
+            radar.follow_target = owner -- Set your spider friend to follow the owner
         end
-        radar.destructible = false
-        radar.follow_target = owner -- Set your spider friend to follow the owner
 
     elseif not has_energy and radar then
         radar.destroy()
@@ -164,6 +182,8 @@ script.on_event(defines.events.on_entity_cloned, function (event)
     if not new_equipment then return end -- That should never happe?
     create(event.destination, new_equipment, new_grid.unique_id)
 end)
+
+-- script.on_event(defines.events.on)
 
 local function init()
     ---@type table<uint, Tracker> by unit_number

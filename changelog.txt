@@ -1,6 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.2
 Date: ??.10.2024
+  Changes:
+    - Lower radar coverage latency. Now keeps up wit legendary tanks with legendary legs.
+  Bugfixes:
+    - Removed visible quality icon from hidden entity.
   Locale:
     - Russian translation by Shadow_man.
 ---------------------------------------------------------------------------------------------------
