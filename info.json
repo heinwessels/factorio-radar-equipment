@@ -1,6 +1,6 @@
 {
   "name": "radar-equipment",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "title": "Radar Equipment",
   "description": "A portable radar that can be placed in equipment grids. Designed for driving the tank remotely in Space Age.",
   "author": "stringweasel",

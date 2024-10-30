@@ -186,17 +186,24 @@ end)
 ---@param event EventData.on_player_selected_area 
 script.on_event(defines.events.on_player_selected_area , function(event)
     -- Workaroud for https://forums.factorio.com/117889
-    -- And the selection tool doesn't currently obey "not-selectable-in-game"
-    if event.item ~= "spidertron-remote" then return end
+    -- And the selection tool doesn't curly obey "not-selectable-in-game"
+    if event.item ~= "spidertron-remote" and event.item ~= "sp-spidertron-patrol-remote" then return end
     local player = game.get_player(event.player_index)
     if not player then return end
+
+    local selected_our_friend = false
     local new_list = { }
     for _, spider in pairs(player.spidertron_remote_selection) do
-        if spider.name ~= "hidden-equipment-radar-friend" then
+        if spider.name == "hidden-equipment-radar-friend" then
+            selected_our_friend = true
+        else
             table.insert(new_list, spider)
         end
     end
-    player.spidertron_remote_selection = new_list
+
+    if selected_our_friend then
+        player.spidertron_remote_selection = new_list
+    end
 end)
 
 local function init()
