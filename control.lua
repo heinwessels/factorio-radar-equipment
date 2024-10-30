@@ -183,7 +183,21 @@ script.on_event(defines.events.on_entity_cloned, function (event)
     create(event.destination, new_equipment, new_grid.unique_id)
 end)
 
--- script.on_event(defines.events.on)
+---@param event EventData.on_player_selected_area 
+script.on_event(defines.events.on_player_selected_area , function(event)
+    -- Workaroud for https://forums.factorio.com/117889
+    -- And the selection tool doesn't currently obey "not-selectable-in-game"
+    if event.item ~= "spidertron-remote" then return end
+    local player = game.get_player(event.player_index)
+    if not player then return end
+    local new_list = { }
+    for _, spider in pairs(player.spidertron_remote_selection) do
+        if spider.name ~= "hidden-equipment-radar-friend" then
+            table.insert(new_list, spider)
+        end
+    end
+    player.spidertron_remote_selection = new_list
+end)
 
 local function init()
     ---@type table<uint, Tracker> by unit_number
