@@ -5,6 +5,7 @@ Date: ??.10.2024
     - Simplified Chinese translation by Houraiji_Kyuusyou.
   Bugfixes:
     - Fixed possible crash to desktop with Spidertron Enhancements' remote. (https://forums.factorio.com/117889)
+    - Fixed possible crash with empty spidertron remote selection.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.3
 Date: 30.10.2024

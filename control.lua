@@ -193,7 +193,7 @@ script.on_event(defines.events.on_player_selected_area , function(event)
 
     local selected_our_friend = false
     local new_list = { }
-    for _, spider in pairs(player.spidertron_remote_selection) do
+    for _, spider in pairs(player.spidertron_remote_selection or { }) do
         if spider.name == "hidden-equipment-radar-friend" then
             selected_our_friend = true
         else
