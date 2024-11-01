@@ -64,14 +64,15 @@ local function create_radar(owner)
     if not radar then return end
     radar.destructible = false
     radar.follow_target = owner -- Set your spider friend to follow the owner
-    
+
     -- Add some high quality equipment to make radar faster
     local grid = radar.grid
+    if not grid then return end
     grid.put{ name = "fission-reactor-equipment", quality = highest_quality, position = { 0, 0 }, }    
     grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 4, 0 }, }    
     grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 6, 0 }, }    
     grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 8, 0 }, }
-    
+
     return radar
 end
 
@@ -90,7 +91,7 @@ local function update(tracker)
 
     if has_energy and not (radar and radar.valid) then
         tracker.radar = create_radar(owner)
-        radar = tracker.radar        
+        radar = tracker.radar
         if radar then
             radar.destructible = false
             radar.follow_target = owner -- Set your spider friend to follow the owner
@@ -109,13 +110,15 @@ local function update(tracker)
             tracker.radar = nil
             return -- Friend will catch up on the next update
         end
+
+        radar.follow_target = owner -- Make sure it wasn't lost somehow
     end
 end
 
 ---@param event EventData.on_tick
 script.on_event(defines.events.on_tick, function(event)
     for unit_number, tracker in pairs(storage.tracked_by_entity) do
-        if (event.tick + unit_number) % (60 * 3) == 0 then
+        if (event.tick + unit_number) % (60 * 5) == 0 then
             update(tracker)
         end
     end
