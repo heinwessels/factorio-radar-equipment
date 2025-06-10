@@ -72,19 +72,19 @@ data:extend{
 }
 
 if tech_to_mimic then
-data:extend {
-  {
-    type = "technology",
-    name = "radar-equipment",
-    effects = {{
-      type = "unlock-recipe",
-      recipe = "radar-equipment"
-    }},
-    icon = "__radar-equipment__/graphics/technology.png",
-    icon_size = 256,
-    order = table.deepcopy(tech_to_mimic.order),
-    prerequisites = table.deepcopy(tech_to_mimic.prerequisites),
-    unit = table.deepcopy(tech_to_mimic.unit),
+  data:extend {
+    {
+      type = "technology",
+      name = "radar-equipment",
+      effects = {{
+        type = "unlock-recipe",
+        recipe = "radar-equipment"
+      }},
+      icon = "__radar-equipment__/graphics/technology.png",
+      icon_size = 256,
+      order = table.deepcopy(tech_to_mimic.order),
+      prerequisites = table.deepcopy(tech_to_mimic.prerequisites),
+      unit = table.deepcopy(tech_to_mimic.unit),
+    }
   }
-}
 end
