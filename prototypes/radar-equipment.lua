@@ -1,25 +1,19 @@
 local item_sounds = require("__base__.prototypes.item_sounds")
 
 ---@type data.TechnologyPrototype
-local tech_to_unlock
-for _, technology in pairs(data.raw.technology) do		
-    if technology.effects then			
+local tech_to_mimic
+for _, technology in pairs(data.raw.technology) do
+    if technology.effects then
         for _, effect in pairs(technology.effects) do
-            if effect.type == "unlock-recipe" then					
+            if effect.type == "unlock-recipe" then
                 if effect.recipe == "tank" then
-                  tech_to_unlock = technology
+                  tech_to_mimic = technology
                   break
                 end
             end
         end
-        if tech_to_unlock then break end
+        if tech_to_mimic then break end
     end
-end
-if tech_to_unlock then
-  table.insert(tech_to_unlock.effects, {
-    type = "unlock-recipe",
-    recipe = "radar-equipment"
-  })
 end
 
 data:extend{
@@ -45,7 +39,7 @@ data:extend{
       {type = "item", name = "iron-plate", amount = 10}
     },
     results = {{type="item", name="radar-equipment", amount=1}},
-    enabled = not tech_to_unlock, -- Just in case the tank doesn't exist. Meh
+    enabled = not tech_to_mimic, -- Just in case the tank doesn't exist. Meh
   },
   {
     type = "night-vision-equipment",
@@ -76,3 +70,21 @@ data:extend{
     color_lookup = {{1, "identity"}},
   },
 }
+
+if tech_to_mimic then
+data:extend {
+  {
+    type = "technology",
+    name = "radar-equipment",
+    effects = {{
+      type = "unlock-recipe",
+      recipe = "radar-equipment"
+    }},
+    icon = "__radar-equipment__/graphics/technology.png",
+    icon_size = 256,
+    order = table.deepcopy(tech_to_mimic.order),
+    prerequisites = table.deepcopy(tech_to_mimic.prerequisites),
+    unit = table.deepcopy(tech_to_mimic.unit),
+  }
+}
+end

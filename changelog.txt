@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.5
 Date: 10.06.2025
+  Changes:
+    - Radar Equipment is now unlocked by a decicated technology.
   Compatibility:
     - Added compatibility with Krastorio 2 vehicles.
 ---------------------------------------------------------------------------------------------------
