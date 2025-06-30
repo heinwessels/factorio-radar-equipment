@@ -1,8 +1,11 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: ??.??.2025
+  Changes:
+    - Show radar coverage distance in description.
   Bugfixes:
     - Fixed energy consumption not being shown correctly.
+    - Fixed rare crash when removing radar equipment from grid.
   Compatibility:
     - Added compatibility with Krastorio 2 Spaced Out vehicles.
 ---------------------------------------------------------------------------------------------------

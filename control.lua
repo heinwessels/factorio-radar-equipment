@@ -140,7 +140,7 @@ script.on_event(defines.events.on_equipment_removed, function (event)
     local tracker = storage.tracked_by_grid[event.grid.unique_id]
     if not tracker then return end
     local entity = tracker.owner
-    if not (entity.valid and entity.grid) then destroy(tracker) end
+    if not (entity.valid and entity.grid) then destroy(tracker) return end
     local remaining_equipment = entity.grid.find("radar-equipment")
     if remaining_equipment then
         tracker.equipment = remaining_equipment

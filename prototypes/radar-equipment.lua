@@ -44,6 +44,13 @@ data:extend{
   {
     type = "night-vision-equipment",
     name = "radar-equipment",
+    localised_description = {"",
+      {"equipment-description.radar-equipment"},
+      "\n[color=#fae8be][font=default-semibold]", -- This is annoying
+      {"description.continuous-radar-coverage-distance"},
+      "[/font][/color]",
+      " 3", -- Won't be true if other mod changes it. Just ask me!
+    },
     sprite = {
       filename = "__radar-equipment__/graphics/equipment.png",
       width = 128,
