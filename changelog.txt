@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.6
-Date: ??.??.2025
+Date: 30.06.2025
   Changes:
     - Show radar coverage distance in description.
   Bugfixes:
