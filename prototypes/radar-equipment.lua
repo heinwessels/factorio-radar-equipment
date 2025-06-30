@@ -60,13 +60,12 @@ data:extend{
     {
       type = "electric",
       buffer_capacity = "180kJ",
-      drain = "30kW",
       input_flow_limit = "240kW",
       usage_priority = "secondary-input",
     },
-    energy_input = "1W",
+    energy_input = "30kW",
     categories = {"armor"},
-    darkness_to_turn_on = 1,
+    darkness_to_turn_on = 0, -- Always on (except at daytime exactly at 0)
     color_lookup = {{1, "identity"}},
   },
 }
