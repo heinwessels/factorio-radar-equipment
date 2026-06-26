@@ -68,9 +68,9 @@ local function create_radar(owner)
     -- Add some high quality equipment to make radar faster
     local grid = radar.grid
     if not grid then return end
-    grid.put{ name = "fission-reactor-equipment", quality = highest_quality, position = { 0, 0 }, }    
-    grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 4, 0 }, }    
-    grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 6, 0 }, }    
+    grid.put{ name = "fission-reactor-equipment", quality = highest_quality, position = { 0, 0 }, }
+    grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 4, 0 }, }
+    grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 6, 0 }, }
     grid.put{ name = "exoskeleton-equipment", quality = highest_quality, position = { 8, 0 }, }
 
     return radar
